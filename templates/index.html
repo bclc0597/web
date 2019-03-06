@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            {% if total_cash >= 10000 %}
+                <tr class="table-success">
+                    <td>TOTAL ASSETS</td>
+                    <td colspan="3"></td>
+                    <td>${{ '%0.2f'|format(total_cash|float) }}</td>
+                </tr>
+            {% endif %}
+            {% if total_cash < 10000 %}
+                <tr class="table-danger">
+                    <td>TOTAL ASSETS</td>
+                    <td colspan="3"></td>
+                    <td>${{ '%0.2f'|format(total_cash|float) }}</td>
+                </tr>
+            {% endif %}
+        </tfoot>
+        <tbody>
+            {% for row in final_owned_stocks %}
+                <tr>
+                    <td>{{ row.symbol }}</td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.shares }}</td>
+                    <td>${{ '%0.2f'|format(row.price|float) }}</td>
+                    <td>${{ '%0.2f'|format(row.total|float) }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>CASH</td>
+                <td colspan="3"></td>
+                <td>${{ '%0.2f'|format(cash_onhand|float) }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="left">
+        <p>Color (Green/Red):</p>
+        <ul>
+            <li>Green: total assets >= starting capital ($10,000) </li>
+            <li>Red: total assets < starting capital ($10,000) </li>
+        </ul>
+    </div>
+{% endblock %}

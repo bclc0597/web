@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    {% if success == 1 %}  //
+        <p><span style="color:blue;font-weight:bold">Password successfully changed!</span></p>
+    {% endif %}
+    <form onsubmit="myFunction()" action="/change" method="post">
+        <div class="form-group">
+            <input autofocus autocomplete="off" id="password" autofocus class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <p id="warntext"></p>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+
+            function myFunction() {
+                if (!document.getElementById('password').value)  // if no user input for password
+                {
+                    event.preventDefault();
+                    alert("Please type in password");
+                }
+                else if (!document.getElementById('confirmation').value)  // if no user input for confirmation
+                {
+                    event.preventDefault();
+                    alert("Please type in confirmation password");
+                }
+                else if (document.getElementById('password').value != document.getElementById('confirmation').value) // if password and confirmation doesnt match
+                {
+                    event.preventDefault();
+                    alert("Password and confirmation password does not match!");
+                }
+            }
+
+
+        </script>
+
+        <div class="form-group">
+            <input class="form-control" id="confirmation" name="confirmation" placeholder="Confirm" type="password">
+        </div>
+        <button id="button" class="btn btn-primary" type="submit">Register</button>
+
+    </form>
+{% endblock %}

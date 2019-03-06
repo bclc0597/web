@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Sold/Buy</th>
+                <th>Shares</th>
+                <th>Price at sold/bought</th>
+                <th>Transacted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in history_rows %}
+                <tr>
+                    <td>{{ row.symbol }}</td>
+                    <td>{{ row.soldbuy }}</td>
+                    <td>{{ row.shares }}</td>
+                    <td>{{ row.price }}</td>
+                    <td>{{ row.time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Note: All timestamp is displaced in Standard Greenwich Mean Time - GMT(UTC +0)</p>
+{% endblock %}
